@@ -151,6 +151,7 @@ Note: Move the BOOT jumper to the left to enable the microcontroller to go into 
 
 14. Open the device manager to check the COM port for the CH340 USB to TTL Converter. In our case, it is COM4.
 
+![Semantic description of image](/image/pic12.png)
 
 <br/>
 <br/>
@@ -165,7 +166,7 @@ Note: Move the BOOT jumper to the left to enable the microcontroller to go into 
 
 # Reflections
 
-This STM32 project creation facilitates us in understanding the UART interface, especially on how to implement it on the STM32. The UART interface transmits data asynchronously and does not use a clock signal to synchronize the transmitter and receiver devices. As a result, the UART interface does not require the clock pin and only 2 pins are required for the transmitter and receiver. This project requires us to use the external UART module in which we are using CH340 USB to TTL Converter since the STM32 board does not have onboard the converter.
+This STM32 project creation facilitates us in understanding the UART interface, especially on how to implement it on the STM32. The UART interface transmits data asynchronously and does not use a clock signal to synchronize the transmitter and receiver devices. As a result, the UART interface does not require the clock pin and only 2 pins are required for the transmitter and receiver. This project requires us to use the external UART module in which we are using CH340 USB to TTL Converter since the STM32 board does not have an onboard converter.
 
 
 
