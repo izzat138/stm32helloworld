@@ -3,7 +3,7 @@ This repository documents the details of the UART project on STM32F103C8T6 MCU t
 
 We are required to program an STM32 MCU using open-source STM32CubeIDE in C language to print the "Hello World" message and the value of the 4-bit DIP switch on the terminal once the switch value is changed. A C code is included in this repository for reference.
 
-stm32helloworld contains the project that uses pins GPIOB-PIN12, GPIOB-PIN13, GPIOB-PIN14 and GPIOB-PIN15 to read DIP switch input and GPIOA-PIN9 and GPIOA-PIN10 as UART interface. Also, this project uses GPIOD-PIN0 and GPIOD-PIN1 for the oscillator.
+stm32helloworld contains the project that uses pins GPIOB-PIN12, GPIOB-PIN13, GPIOB-PIN14 and GPIOB-PIN15 to read DIP switch input and GPIOA-PIN9 and GPIOA-PIN10 as UART interface. Also, this project uses GPIOD-PIN0 and GPIOD-PIN1 for teh RCC controller.
 
 
 
