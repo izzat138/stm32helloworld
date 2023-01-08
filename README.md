@@ -85,7 +85,7 @@ stm32helloworld contains the project that uses pins GPIOB-PIN12, GPIOB-PIN13, GP
 <br/>
 
 
-7. Only a section of the generated code is modified. In this project, the executing loop is added with built-in functions to light up the LEDs with the Knight Rider pattern. Also, the project includes a function to control the speed and together with a function to update the speed in a certain condition.
+7. Only a section of the generated code is modified. In this project, the executing loop is added with built-in functions to print "Hello World" and the value of the 4-bit DIP switch on the terminal once the switch value is changed.
 
 ![Semantic description of image](/image/pic4.png)
 
