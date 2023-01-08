@@ -1,9 +1,9 @@
-# stm32switchread
-This repository documents the details of Reading Switch Inputs project on an STM32F103C8T6 MCU using STM32CubeIDE, an open-source C/C++ development platform for STM32 microcontrollers and microprocessors.
+# stm32helloworld
+This repository documents the details of the UART project on STM32F103C8T6 MCU together with the STM32CubeIDE, an open-source C/C++ development platform for STM32 microcontrollers and microprocessors.
 
-We are required to program an STM32 MCU using open-source STM32CubeIDE in C language to control the speed of the Knight Rider pattern using DIP switch. A C code is included in this repository for reference.
+We are required to program an STM32 MCU using open-source STM32CubeIDE in C language to print the "Hello World" message and the value of the 4-bit DIP switch on the terminal once the switch value is changed. A C code is included in this repository for reference.
 
-stm32switchread contains the project that uses pins GPIOA-PIN0, GPIOA-PIN4, GPIOA-PIN6, GPIOA-PIN7, GPIOB-PIN0, GPIOB-PIN1, GPIOB-PIN10 and GPIOB-PIN11 to light up the LEDs with the Knight Rider pattern. In addition, the project use pins GPIOB-PIN12, GPIOB-PIN13, GPIOB-PIN14 and GPIOB-PIN15 to control the Knight Rider Speed. Value 0000 is the slowest speed while value 1111 is the fastest. The speed will only be updated when pin GPIOB-PIN4 is low.
+stm32helloworld contains the project that uses pins GPIOB-PIN12, GPIOB-PIN13, GPIOB-PIN14 and GPIOB-PIN15 to read DIP switch input and GPIOA-PIN9 and GPIOA-PIN10 as UART interface. Also, this project uses GPIOD-PIN0 and GPIOD-PIN1 for the oscillator.
 
 
 
@@ -16,17 +16,17 @@ stm32switchread contains the project that uses pins GPIOA-PIN0, GPIOA-PIN4, GPIO
 ## Project Prerequisites
 1. STM32CubeIDE software
 2. STM32 MCU
+3. Putty
 
 
 
 ## Hardware Requirements
 1. STM32F103C8T6 Board Blue Pill
 2. ST-Link V2 Programming Unit
-3. Leds - 8
-4. Switch - 1
-5. DIP switch - 1 
-6. 1k ohm resistors - 13
-7. 10k ohm resistors - 4
+3. CH340 USB to TTL Converter UART Module 
+4. DIP switch - 1 
+5. 1k ohm resistors - 4
+6. 10k ohm resistors - 4
 
 
 
@@ -49,7 +49,7 @@ stm32switchread contains the project that uses pins GPIOA-PIN0, GPIOA-PIN4, GPIO
 <br/>
 
 
-3. Assign any output pins as the GPIO output pin by clicking the pin in the pinout view. Configuration for SYS under system core pull-down menu is set to **serial wire** for debugging mode and **SysTrick** as timebase source. Save the project to generate C code for given project configurations.
+3. Assign GPIOB-PIN12, GPIOB-PIN13, GPIOB-PIN14 and GPIOB-PIN15 as the GPIO input by clicking the pin in the pinout view. 
 
 ![Semantic description of image](/image/pic3.png)
 
@@ -58,16 +58,42 @@ stm32switchread contains the project that uses pins GPIOA-PIN0, GPIOA-PIN4, GPIO
 <br/>
 
 
-4. Only a section of the generated code is modified. In this project, the executing loop is added with built-in functions to light up the LEDs with the Knight Rider pattern. Also, the project includes a function to control the speed and together with a function to update the speed in a certain condition.
+4. Right-click the Connectivity > USART1 and set the mode as ‘Asynchronous’.
 
-![Semantic description of image](/image/pic4.png)
 ![Semantic description of image](/image/pic9.png)
 
+
 <br/>
 <br/>
 
 
-5. Under project properties(Right click project, select properties), select to convert builds to binary and hex files under MCU Post build outputs. Apply the changes.
+5. Right-click the System Core > RCC and then click ‘Crystal/Ceramic Resonator’ in from the High Speed Clock feature. This will enable the RCC external clock source.
+
+![Semantic description of image](/image/pic10.png)
+
+
+<br/>
+<br/>
+
+
+6. Right-click the Clock Configuration found at the top and set HCLK to 72 MHz.
+
+![Semantic description of image](/image/pic11.png)
+
+
+<br/>
+<br/>
+
+
+7. Only a section of the generated code is modified. In this project, the executing loop is added with built-in functions to light up the LEDs with the Knight Rider pattern. Also, the project includes a function to control the speed and together with a function to update the speed in a certain condition.
+
+![Semantic description of image](/image/pic4.png)
+
+<br/>
+<br/>
+
+
+8. Under project properties(Right click project, select properties), select to convert builds to binary and hex files under MCU Post build outputs. Apply the changes.
 
 ![Semantic description of image](/image/pic6.png)
 
@@ -76,7 +102,7 @@ stm32switchread contains the project that uses pins GPIOA-PIN0, GPIOA-PIN4, GPIO
 <br/>
 
 
-6. Start building the debug for the current project.
+9. Start building the debug for the current project.
 
 ![Semantic description of image](/image/pic5.png)
 
@@ -85,7 +111,7 @@ stm32switchread contains the project that uses pins GPIOA-PIN0, GPIOA-PIN4, GPIO
 <br/>
 
 
-7. Connect the STM32 with all the components as shown below
+10. Connect the STM32 with all the components as shown below.
 
 ![Semantic description of image](/image/schematic.png)
 
@@ -94,7 +120,7 @@ stm32switchread contains the project that uses pins GPIOA-PIN0, GPIOA-PIN4, GPIO
 <br/>
 
 
-8. STM32 ST-LINK Utility is utilized to program the SM32F103C8T6 MCU through an ST-LINK V2. The generated binary/hex files are opened through this application.
+11. STM32 ST-LINK Utility is utilized to program the SM32F103C8T6 MCU through an ST-LINK V2. The generated binary/hex files are opened through this application.
 
 ![Semantic description of image](/image/pic7.png)
 
@@ -103,7 +129,9 @@ stm32switchread contains the project that uses pins GPIOA-PIN0, GPIOA-PIN4, GPIO
 <br/>
 
 
-9. Connect the STM32 MCU through the USB port with the ST-LINK V2. Then, connect with the MCU in the utility and start to program it.
+12. Connect the STM32 MCU through the USB port with the ST-LINK V2. Then, connect with the MCU in the utility and start to program it.
+
+Note: Move the BOOT jumper to the right to enable the microcontroller to go into programming mode.
 
 ![Semantic description of image](/image/pic8.png)
 
@@ -112,11 +140,23 @@ stm32switchread contains the project that uses pins GPIOA-PIN0, GPIOA-PIN4, GPIO
 <br/>
 
 
-# Project Demo
+13. Use the CH340 USB to TTL Converter to connect the STM32 MCU through the USB port.
 
-https://user-images.githubusercontent.com/106621749/203887910-23e8e2eb-df35-451b-80b0-0079ab214625.mp4
+Note: Move the BOOT jumper to the left to enable the microcontroller to go into normal mode.
 
-*Youtube URL: https://youtu.be/sDqwvIAOW5w*
+
+<br/>
+<br/>
+
+
+14. Open the device manager to check the COM port for the CH340 USB to TTL Converter. In our case, it is COM4.
+
+
+<br/>
+<br/>
+
+
+15. Open the Putty software and set the correct speed and COM port and then press Open to establish a connection. The message send from the STM32 MCU will be displayed throught the terminal.
 
 
 <br/>
@@ -125,17 +165,11 @@ https://user-images.githubusercontent.com/106621749/203887910-23e8e2eb-df35-451b
 
 # Reflections
 
-This basic STM32 project creation facilitates us to understand the capabilities and utilities provided by STM32CubeIDE to program an STM32 MCU. This repository can be referred for any future project creations.
-
-It is important to check that all the electronic components are working perfectly beforehand. During the time we worked on this project, we encountered a problem where the speed is not changing. This issue was caused by the defective BCD switch which cost us quite some time to debug. Replacing the BCD switch with the new one has proven that there is something wrong with the previous BCD switch.
-
-Also, we have not taken care of the input pins properly, where we left the pins floating with no external pull-up or pull-down. This state is undetermined when floating, which causes a variety of issues.
-
-In addition, counterfeit ST-LINK is an ongoing issue being investigated by STMicroelectronics. In the recent releases of STM32CubeIDE, a counter measure is made by STMicroelectronics to prevent the programming of an STM32 MCU with a counterfeit ST-LINK. However, to overcome the difficulty of finding and owning an actual ST-LINK, STM32 ST-LINK Utility can be used to program STM32 MCU instead with a cloned ST-LINK.
+This STM32 project creation facilitates us in understanding the UART interface, especially on how to implement it on the STM32. The UART interface transmits data asynchronously and does not use a clock signal to synchronize the transmitter and receiver devices. As a result, the UART interface does not require the clock pin and only 2 pins are required for the transmitter and receiver. This project requires us to use the external UART module in which we are using CH340 USB to TTL Converter since the STM32 board does not have onboard the converter.
 
 
 
 
 # References
+1. STM32 Blue Pill UART Communication Tutorial with CubeIDE and HAL Libraries: https://microcontrollerslab.com/stm32-blue-pill-uart-tutorial-polling-method/*
 
-*Youtube URL (Creation of Blinky project): https://youtu.be/kXg467nVd_A*
